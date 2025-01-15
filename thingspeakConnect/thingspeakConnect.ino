@@ -4,8 +4,8 @@ const char* ssid = "Mikkels phone";
 const char* pass = "456789er";
 WiFiClient client;
 unsigned long channelID = 2809451; //Channel ID of the ThingSpeak channel
-const char * writeAPIKey = "0LYBHH8XR80QLZIN"; //Write API key for the ThingSpeak Channel
-const char* readAPIKey = "3BVUMEF3172HF9DV"; //Read  API key for the ThingSpeak Channel
+const char * writeAPIKey = "0"; //Write API key for the ThingSpeak Channel
+const char* readAPIKey = "0"; //Read  API key for the ThingSpeak Channel
 const char* server = "api.thingspeak.com";
 const int postDelay = 20 * 1000;
 
@@ -24,6 +24,7 @@ void loop() {
   setData(1, 5);
   setAlarm(alarm);
   sendUpdate();
+  client.stop();
   alarm = !alarm;
   delay(postDelay);
 }
@@ -58,6 +59,11 @@ void setAlarm(bool state){
 }
 
 int requestData(unsigned int field){
-  
-  return 0;
+  int readData = ThingSpeak.readIntField(channelID, field, readAPIKey);
+
+  if(readData = 0){
+    return NULL
+  }else{
+    return readData;
+  }
 }
