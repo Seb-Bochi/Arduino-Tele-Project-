@@ -1,100 +1,27 @@
-/* V1.0. RFID_code
- * This program stores a number of electronic keys UIDs. 
- * Using the RFID-RC522 module to read cards and keys.
- * Check if the card or keys UID has access or should be denied. 
- *
- * So far two values is calculated, an approved value, that can be 1 or 0, depending of access was approved or denied. 
- * The UID of the card or key 
- *
- * Futher work: Make the ESP8288 send the UID and approved flag to another ESP8288. 
-
-
-*/
-
+#ifndef RFID_H
+#define RFID_H
 
 #include <SPI.h>
 #include <MFRC522.h>
 
+// Define pins for the RFID module
 #define RST_PIN 9  // Configurable, see typical pin layout above
 #define SS_PIN 10  // Configurable, see typical pin layout above
 
-MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
+// Declare the struct to hold RFID results
+struct RFIDResult {
+    uint8_t approved;   // flag (1 if approved, 0 otherwise)
+    String content;     // UID of the registered card
+};
 
-
+// Declare functions
 void RFIDsetup();
-String readUID(); 
+RFIDResult readUID();
 
-String knownUIDs[] = { "4D 02 8A 3F", "93 14 F4 E1" };  // Contains the UIDs that as approved
-uint8_t approved = 0;   // flag
-String content = "";
+// Declare the global variable for known UIDs
+extern String knownUIDs[];
 
-void setup() {
- RFIDsetup(); 
-}
+// Declare the RFID instance
+extern MFRC522 mfrc522;
 
-void loop() {
- 
-  readUID();
-  
-  
-
-}
-
-void RFIDsetup(){
-  Serial.begin(9600);  // Initialize serial communications with PC
-  SPI.begin();         // Initiate SPI bus
-  mfrc522.PCD_Init();  // Initiate MFRC522
-  delay(4);
-  Serial.println();
-  Serial.println("Put the card close to the reader");
-}
-
-
- // check every if the registered UID match any approved UID
- // If a match exist 1 will be returend otherwise 0 is returned. 
-
-
-
-
- String readUID(){
-
-    content = "";
-
-     if (!mfrc522.PICC_IsNewCardPresent()) {
-        return "";
-    }
-    if (!mfrc522.PICC_ReadCardSerial()) {
-        return "";
-    }
-    
-    // Show UID on serial monitir
-    //Serial.print("UID tag");
-    byte letter;
-    for (byte i = 0; i < mfrc522.uid.size; i++) {
-      Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
-      Serial.print(mfrc522.uid.uidByte[i], HEX);  // Print the UID byte
-
-      content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));  // Appends the reuslting String to the content varible
-      content.concat(String(mfrc522.uid.uidByte[i], HEX));                 // Converts the UID into Hex in a String object
-    }
-     approved = 0; 
-    Serial.println(); 
-
-  for (int i = 0; i <  (sizeof(knownUIDs) / sizeof(knownUIDs[0])); i++) { 
-
-     content.toUpperCase();
-
-    if (content.substring(1) == knownUIDs[i]) {
-      approved = 1; 
-      break; // Stop checking once a match is found
-    }
-  }
-
-  if ( approved == 1){
-    Serial.println("Authorized access"); 
-  } else {
-    Serial.println("Access denied");  
-  }
-    return content;
-
- }
+#endif  // RFID_H
