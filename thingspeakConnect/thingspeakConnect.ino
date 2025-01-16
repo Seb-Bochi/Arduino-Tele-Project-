@@ -22,7 +22,7 @@ void loop() {
   ThingSpeak.begin(client);
   client.connect(server, 80); //connect(URL, Port)
 
-  setData(1, 5);
+  setDataInt(1, 5);
   setAlarm(alarm);
   sendUpdate();
 
@@ -33,15 +33,28 @@ void loop() {
   delay(postDelay);
 }
 
-void setData(unsigned int field, int value){
+void setDataInt(unsigned int field, int value){
   int x = 0;
 
   x =  ThingSpeak.setField(field, value);
 
   if (x == 200){
-    Serial.println("setData: Data set succesfully!");
+    Serial.println("setDataInt: Data set succesfully!");
   }else{
-    Serial.print("setData: Error ");
+    Serial.print("setDataInt: Error ");
+    Serial.println(x);
+  }
+}
+
+void setDataString(unsigned int field, char* string[16]){
+  int x = 0;
+
+  x =  ThingSpeak.setField(field, string);
+
+  if (x == 200){
+    Serial.println("setDataString: Data set succesfully!");
+  }else{
+    Serial.print("setDataString: Error ");
     Serial.println(x);
   }
 }
@@ -59,7 +72,7 @@ void sendUpdate(){
 }
 
 void setAlarm(bool state){
-  setData(2, (int)state);
+  setDataInt(2, (int)state);
 }
 
 int requestData(unsigned int field){
