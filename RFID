@@ -1,27 +1,54 @@
-#ifndef RFID_H
-#define RFID_H
+/* V1.0. RFID_code
+ * This program stores a number of electronic keys UIDs. 
+ * Using the RFID-RC522 module to read cards and keys.
+ * Check if the card or keys UID has access or should be denied. 
+ *
+ * So far two values is calculated, an approved value, that can be 1 or 0, depending of access was approved or denied. 
+ * The UID of the card or key 
+ *
+ * Futher work: Make the ESP8288 send the UID and approved flag to another ESP8288. 
 
-#include <SPI.h>
-#include <MFRC522.h>
 
-// Define pins for the RFID module
-#define RST_PIN 9  // Configurable, see typical pin layout above
-#define SS_PIN 10  // Configurable, see typical pin layout above
+*/
+#include "RFID.h"
+#include <Arduino.h>
 
-// Declare the struct to hold RFID results
-struct RFIDResult {
-    uint8_t approved;   // flag (1 if approved, 0 otherwise)
-    String content;     // UID of the registered card
-};
+void RFIDsetup() {
 
-// Declare functions
-void RFIDsetup();
-RFIDResult readUID();
+   
+    SPI.begin();         // Initiate SPI bus
+    mfrc522.PCD_Init();  // Initiate MFRC522
+    delay(4);
+}
 
-// Declare the global variable for known UIDs
-extern String knownUIDs[];
+RFIDResult readUID() {
+    RFIDResult result;  // Create a struct to hold the result
+    result.content = "";
+    result.approved = 0;
 
-// Declare the RFID instance
-extern MFRC522 mfrc522;
+    if (!mfrc522.PICC_IsNewCardPresent()) {
+        return result;  // Return empty result if no card is present
+    }
+    if (!mfrc522.PICC_ReadCardSerial()) {
+        return result;  // Return empty result if UID can't be read
+    }
 
-#endif  // RFID_H
+    // Construct the UID string
+    for (byte i = 0; i < mfrc522.uid.size; i++) {
+        result.content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+        result.content.concat(String(mfrc522.uid.uidByte[i], HEX));
+    }
+    result.content.toUpperCase();  // Convert the UID string to uppercase
+
+    // Check if the UID matches any approved UIDs
+    for (int i = 0; i < (sizeof(knownUIDs) / sizeof(knownUIDs[0])); i++) {
+        if (result.content.substring(1) == knownUIDs[i]) {
+            result.approved = 1;  // Mark as approved if a match is found
+            break;
+        }
+    }
+
+    
+
+    return result;
+}

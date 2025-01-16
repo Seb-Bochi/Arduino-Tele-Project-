@@ -4,24 +4,21 @@
 #include <SPI.h>
 #include <MFRC522.h>
 
-// Define pins for the RFID module
-#define RST_PIN 9  // Configurable, see typical pin layout above
-#define SS_PIN 10  // Configurable, see typical pin layout above
-
-// Declare the struct to hold RFID results
+// Structure to hold RFID results
 struct RFIDResult {
-    uint8_t approved;   // flag (1 if approved, 0 otherwise)
-    String content;     // UID of the registered card
+    uint8_t approved;   // 1 if approved, 0 otherwise
+    String content;     // UID of the detected card
 };
+
+// Extern declarations for knownUIDs and its size
+extern String knownUIDs[];
+
 
 // Declare functions
 void RFIDsetup();
 RFIDResult readUID();
 
-// Declare the global variable for known UIDs
-extern String knownUIDs[];
-
-// Declare the RFID instance
+// Declare the RFID instance as extern
 extern MFRC522 mfrc522;
 
 #endif  // RFID_H
