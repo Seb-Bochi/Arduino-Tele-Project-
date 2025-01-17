@@ -1,5 +1,16 @@
 #include <ESP8266WiFi.h>
 #include <espnow.h>
+#include <ThingSpeak.h>
+
+const char* ssid = "Mikkels phone";
+const char* pass = "456789er";
+WiFiClient client;
+unsigned long channelID = 2809451; //Channel ID of the ThingSpeak channel
+const char * writeAPIKey = "0LYBHH8XR80QLZIN"; //Write API key for the ThingSpeak Channel
+const char* readAPIKey = "3BVUMEF3172HF9DV"; //Read  API key for the ThingSpeak Channel
+const char* server = "api.thingspeak.com";
+const int postDelay = 20 * 1000;
+int count = 0;
 
 const int ledPinRed = D3;
 const int ledPinGreen = D4;
@@ -14,7 +25,7 @@ int prev_buttonState = false;
 typedef struct Device2_message {
     int Detected_Light;
     int RFID_Access;
-    float UID;
+    String UID;
 } Device2_message;
 
 typedef struct Device1_message {
@@ -68,6 +79,9 @@ void setup() {
 
   initAlarm(ledPinRed,ledPinGreen, buzzerPin,ButtonPin);
   
+  // Connect device to Wifi
+  WiFi.begin(ssid, pass);
+
   // Set device as a Wi-Fi Station to cormect to the other 
   WiFi.mode(WIFI_STA);
 
@@ -81,28 +95,32 @@ void setup() {
   // get recv packer info
   esp_now_set_self_role(ESP_NOW_ROLE_SLAVE); // sets the device as a revicer of data 
   esp_now_register_recv_cb(OnDataRecv); 
+
+  ThingSpeak.begin(client);
+  client.connect(server, 80); //connect(URL, Port)
 }
 
 void loop() {
 
-if (alarm == false){
-      Serial.println(alarm);
-      alarm_off(ledPinRed,ledPinGreen, buzzerPin);
-      alarm=check_button(ButtonPin);
-      //check if button is pressed to put alarm on   
-    }
-else{
-  alarm_on_sound_but_no_sound(ledPinRed,ledPinGreen, buzzerPin);
-}
+  if (alarm == false){
+        //Serial.println(alarm);
+        alarm_off(ledPinRed,ledPinGreen, buzzerPin);
+        alarm=check_button(ButtonPin);
+        //check if button is pressed to put alarm on   
+      }
+  else{
+    alarm_on_sound_but_no_sound(ledPinRed,ledPinGreen, buzzerPin);
+  }
 
 
-if (New_messege){ // gets a messenge from the other esp
-    
+  if (New_messege){ // gets a messenge from the other esp
     if (alarm==true){  
       if (Device2.RFID_Access == 1){
          burglary=false;
          alarm=false;
          // send the UID to thingspeak
+         setUIDString(3, Device2.UID);
+
          alarm_off(ledPinRed,ledPinGreen, buzzerPin);
          
        }
@@ -117,7 +135,16 @@ if (New_messege){ // gets a messenge from the other esp
     }   
   New_messege=false; 
   }
-  
+
+  if(count == postDelay){
+    sendUpdate();
+    count = 0;
+  }
+
+  //client.stop();
+
+  delay(1);
+  count++;
 }
 
 
@@ -166,4 +193,29 @@ int check_button(int Button_Pin){
   }
   prev_buttonState = buttonState; 
   return false;
+}
+
+void setUIDString(unsigned int field, String str){
+  int x = 0;
+
+  x =  ThingSpeak.setField(field, str);
+
+  if (x == 200){
+    Serial.println("setDataString: Data set succesfully!");
+  }else{
+    Serial.print("setDataString: Error ");
+    Serial.println(x);
+  }
+}
+
+void sendUpdate(){
+  int x = 0;
+  x = ThingSpeak.writeFields(channelID, writeAPIKey);
+
+  if (x == 200){
+    Serial.println("sendUpdate: Update sent succesfully!");
+  }else{
+    Serial.print("sendUpdate: Error");
+    Serial.println(x);
+  }
 }
