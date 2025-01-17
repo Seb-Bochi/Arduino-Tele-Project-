@@ -4,8 +4,8 @@ const char* ssid = "Mikkels phone";
 const char* pass = "456789er";
 WiFiClient client;
 unsigned long channelID = 2809451; //Channel ID of the ThingSpeak channel
-const char * writeAPIKey = "0"; //Write API key for the ThingSpeak Channel
-const char* readAPIKey = "0"; //Read  API key for the ThingSpeak Channel
+const char * writeAPIKey = "0LYBHH8XR80QLZIN"; //Write API key for the ThingSpeak Channel
+const char* readAPIKey = "3BVUMEF3172HF9DV"; //Read  API key for the ThingSpeak Channel
 const char* server = "api.thingspeak.com";
 const int postDelay = 20 * 1000;
 
@@ -22,11 +22,7 @@ void loop() {
   ThingSpeak.begin(client);
   client.connect(server, 80); //connect(URL, Port)
 
-  setDataInt(1, 5);
-  setAlarm(alarm);
-  sendUpdate();
-
-  testData = requestData(1);
+  test();
 
   client.stop();
   alarm = !alarm;
@@ -46,10 +42,11 @@ void setDataInt(unsigned int field, int value){
   }
 }
 
-void setDataString(unsigned int field, char* string[16]){
+
+void setDataString(unsigned int field, String str){
   int x = 0;
 
-  x =  ThingSpeak.setField(field, string);
+  x =  ThingSpeak.setField(field, str);
 
   if (x == 200){
     Serial.println("setDataString: Data set succesfully!");
@@ -85,4 +82,16 @@ int requestData(unsigned int field){
     Serial.println("requestData: Successful");
     return readData;
   }
+}
+int testInt = 0;
+
+void test(){
+  setDataInt(1, testInt++);
+  setDataString(3, "abcdabcdabcdabcd");
+  //ThingSpeak.setField(3, "ABCD");
+  setAlarm(alarm);
+  sendUpdate();
+
+  testData = requestData(1);
+  Serial.println(testData);
 }
