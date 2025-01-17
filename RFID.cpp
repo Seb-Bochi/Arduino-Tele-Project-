@@ -11,14 +11,19 @@
 
 */
 #include "RFID.h"
-#include <Arduino.h>
+
+// Define the known UIDs
+String knownUIDs[] = { "4D 02 8A 3F", "93 14 F4 E1" };
+
+// Define the RFID instance
+MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
 
 void RFIDsetup() {
-
-   
+    Serial.begin(9600);  // Initialize serial communications with PC
     SPI.begin();         // Initiate SPI bus
     mfrc522.PCD_Init();  // Initiate MFRC522
     delay(4);
+    Serial.println("Put the card close to the reader");
 }
 
 RFIDResult readUID() {
@@ -48,7 +53,11 @@ RFIDResult readUID() {
         }
     }
 
-    
+    if (result.approved) {
+        Serial.println("Authorized access");
+    } else {
+        Serial.println("Access denied");
+    }
 
     return result;
 }
