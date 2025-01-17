@@ -201,9 +201,9 @@ void setUIDString(unsigned int field, String str){
   x =  ThingSpeak.setField(field, str);
 
   if (x == 200){
-    Serial.println("setDataString: Data set succesfully!");
+    Serial.println("setUIDString: Data set succesfully!");
   }else{
-    Serial.print("setDataString: Error ");
+    Serial.print("setUIDString: Error ");
     Serial.println(x);
   }
 }
