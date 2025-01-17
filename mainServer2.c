@@ -9,6 +9,7 @@
 struct CustomData {
     int RFIDAlarm;
     int lightSensorAlarm;
+    String UID; 
 };
 
 // MAC address variable
@@ -22,6 +23,8 @@ int calibrated_Photoresistor = 0;
 int value_Photoresistor=0;
 int threeshold_Photoresistor=100;
 int alarm_sound_2 = 0; 
+const char* ssid = "Mikkels phone";
+const char* pass = "456789er"; 
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
@@ -31,6 +34,7 @@ void setup() {
     calibrated_Photoresistor = initialize_Photoresistor(photopin);
     initESPNow();
     registerPeer(broadcastAddress);
+    WiFi.begin(ssid, pass);
 }
 
 void loop() {
@@ -40,18 +44,22 @@ void loop() {
 
 
 
-CustomData dataToSend;
-    dataToSend.RFIDAlarm = result.approved;
-    dataToSend.lightSensorAlarm = alarmPhoto;
+  CustomData dataToSend;
+      dataToSend.RFIDAlarm = result.approved;
+      dataToSend.lightSensorAlarm = alarmPhoto;
+      dataToSend.UID = result.content;
 
-    Serial.print("Light sensor: ");
-    Serial.println(alarmPhoto);
-    Serial.print("RFID: ");
-    Serial.println(result.approved);
+      Serial.print("Light sensor: ");
+      Serial.println(alarmPhoto);
+      Serial.print("RFID: ");
+      Serial.println(result.approved);
+      Serial.print("UID: ");
+      Serial.println(result.content);
 
-
+     if(result.approved == 1|| alarmPhoto == 1){
     sendData(broadcastAddress, &dataToSend, sizeof(dataToSend));
+    
+      
+    }
 
-
-    delay(1000);  // Delay between reads
 }
