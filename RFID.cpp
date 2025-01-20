@@ -11,19 +11,14 @@
 
 */
 #include "RFID.h"
-
-// Define the known UIDs
-String knownUIDs[] = { "4D 02 8A 3F", "93 14 F4 E1" };
-
-// Define the RFID instance
-MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
+#include <Arduino.h>
 
 void RFIDsetup() {
-    Serial.begin(9600);  // Initialize serial communications with PC
+
+   
     SPI.begin();         // Initiate SPI bus
     mfrc522.PCD_Init();  // Initiate MFRC522
     delay(4);
-    Serial.println("Put the card close to the reader");
 }
 
 RFIDResult readUID() {
@@ -40,23 +35,17 @@ RFIDResult readUID() {
 
     // Construct the UID string
     for (byte i = 0; i < mfrc522.uid.size; i++) {
-        result.content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+        result.content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? "0" : ""));
         result.content.concat(String(mfrc522.uid.uidByte[i], HEX));
     }
     result.content.toUpperCase();  // Convert the UID string to uppercase
 
     // Check if the UID matches any approved UIDs
     for (int i = 0; i < (sizeof(knownUIDs) / sizeof(knownUIDs[0])); i++) {
-        if (result.content.substring(1) == knownUIDs[i]) {
+        if (result.content == knownUIDs[i]) {
             result.approved = 1;  // Mark as approved if a match is found
             break;
         }
-    }
-
-    if (result.approved) {
-        Serial.println("Authorized access");
-    } else {
-        Serial.println("Access denied");
     }
 
     return result;
