@@ -1,16 +1,21 @@
 #include <ESP8266WiFi.h>
 #include <espnow.h>
 #include <ThingSpeak.h>
+#include <NTPClient.h>
+
 
 const char* ssid = "Mikkels phone";
 const char* pass = "456789er";
-WiFiClient client;
+WiFiClient client2;
 unsigned long channelID = 2809451; //Channel ID of the ThingSpeak channel
 const char * writeAPIKey = "0LYBHH8XR80QLZIN"; //Write API key for the ThingSpeak Channel
 const char* readAPIKey = "3BVUMEF3172HF9DV"; //Read  API key for the ThingSpeak Channel
 const char* server = "api.thingspeak.com";
-const int postDelay = 20 * 1000;
+unsigned long lastUpdate = 0;
+const unsigned long postDelay = 20*1000;
 int count = 0;
+
+WiFiClient client;
 
 const int ledPinRed = D3;
 const int ledPinGreen = D4;
@@ -18,7 +23,7 @@ const int buzzerPin = D8;
 const int ButtonPin=D7;
 bool New_messege = false;
 bool burglary = false;
-int alarm=false;
+bool alarm=false;
 int prev_buttonState = false;
 
 typedef struct Device1_message {
@@ -32,12 +37,12 @@ typedef struct Device2_message {
     String UID;
 } Device2_message;
 
-
-
-
 // Create a struct_message called myData
 Device1_message Device1;
 Device2_message Device2;
+
+WiFiServer espServer(80); /* Instance of WiFiServer with port number 80 */
+/* 80 is the Port Number for HTTP Web Server */
 
 // Callback function that will be executed when data is received
 void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
@@ -71,7 +76,7 @@ void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
         Serial.println("Unknown Device");
     }
 
-  New_messege=true;
+  New_messege=true; 
 }
 
  
@@ -83,7 +88,7 @@ void setup() {
   
   // Connect device to Wifi
   WiFi.begin(ssid, pass);
-
+  websiteBegin(&ssid,&pass);
   // Set device as a Wi-Fi Station to cormect to the other 
   WiFi.mode(WIFI_STA);
 
@@ -98,11 +103,12 @@ void setup() {
   esp_now_set_self_role(ESP_NOW_ROLE_SLAVE); // sets the device as a revicer of data 
   esp_now_register_recv_cb(OnDataRecv); 
 
-  ThingSpeak.begin(client);
-  client.connect(server, 80); //connect(URL, Port)
+  ThingSpeak.begin(client2);
+  client2.connect(server, 80); //connect(URL, Port)
 }
-
 void loop() {
+  Websiteloop(&alarm,&burglary,Device2.UID);
+
 // Check if the alarm is off and handle the button press to activate it
   if (alarm == false) {
     alarm_off(ledPinRed, ledPinGreen, buzzerPin);
@@ -111,8 +117,7 @@ void loop() {
   else {
     // Alarm is ON, process incoming messages or burglary status
     if (New_messege || burglary) {
-      delay(10);
-      New_messege = false;
+       New_messege = false;
 
       // Check if RFID is present to turn off the alarm
       if (Device2.RFID_Access == 1) {
@@ -124,12 +129,11 @@ void loop() {
         Device2.Detected_Light =0;
         Device2.RFID_Access=0;
         // Optionally send the UID to ThingSpeak
-        //setUIDString(3, Device2.UID); // Sending UID to ThingSpeak (Field 3)
+        setUIDString(3, Device2.UID); // Sending UID to ThingSpeak (Field 3)
       }
-      else if ((Device1.Detected_Sound == 1) || (Device1.Detected_Motion == 1) || (Device2.Detected_Light == 1) || burglary) {
+      else if ((Device1.Detected_Sound == 1) || (Device1.Detected_Motion == 1) || (Device2.Detected_Light == 1) || (burglary)) {
                   alarm_sound(ledPinRed, ledPinGreen, buzzerPin); // Trigger the alarm sound and lights
                   burglary = true;  // Mark that a burglary occurred
-                  //alarm = true;     // Keep the alarm on
                   } 
     } 
     else {
@@ -138,54 +142,152 @@ void loop() {
   }
 
   // Periodically update ThingSpeak
-  if (count >= postDelay) {
-    setAlarm((bool)alarm); // Update alarm state on ThingSpeak (Field 2)
+  unsigned long currentMillis = millis();
+  if (currentMillis - lastUpdate >= postDelay) {
+    lastUpdate = currentMillis;
+    setAlarm((bool)burglary); // Update alarm state on ThingSpeak (Field 2)
     sendUpdate();          // Push data to ThingSpeak
-    count = 0;             // Reset counter
+    //count = 0;             // Reset counter
   }
- /* if (alarm == false){
-        //Serial.println(alarm);
-        alarm_off(ledPinRed,ledPinGreen, buzzerPin);
-        alarm=check_button(ButtonPin);
-        //check if button is pressed to put alarm on   
-      }
-  else{
-    if (New_messege ||burglary ){ // gets a messenge from the other esp
-      New_messege=false; 
-      if (Device2.RFID_Access == 1){
-         burglary=false;
-         alarm=false;
-         // send the UID to thingspeak
-         //setUIDString(3, Device2.UID);
-         alarm_off(ledPinRed,ledPinGreen, buzzerPin);
-         
-      }
-      if(Device1.Detected_Sound == 1 || Device1.Detected_Motion == 1 || Device2.Detected_Light == 1|| burglary==true ){
-        alarm_sound(ledPinRed,ledPinGreen, buzzerPin); // makes lights blik and buzzer makes sound (alarm has been trigered) 
-        burglary=true;
-        alarm=true; 
-      }
+ if ((currentMillis - lastUpdate)%1000==1){
+    Serial.println((currentMillis - lastUpdate));
+ }
 
-  }
-  else{
-      alarm_on_sound_but_no_sound(ledPinRed,ledPinGreen, buzzerPin);
-      }
-  }
-
-
-  
-
-  if(count == postDelay){
-    setAlarm((bool)alarm);
-    sendUpdate();
-    count = 0;
-  }
-
-  //client.stop();
-
-  delay(1);
-  count++;*/
+  //delay(1);
+  //count++;
 }
+
+
+void websiteBegin(const char** ssid,const char** password ) {
+  Serial.print("\n");
+  Serial.print("Connecting to: ");
+  Serial.println(*ssid);
+  WiFi.mode(WIFI_STA);        /* Configure ESP8266 in STA Mode */
+  WiFi.begin(*ssid, *password); /* Connect to Wi-Fi based on above SSID and Password */
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print("*");
+    delay(500);
+  }
+  Serial.print("\n");
+  Serial.print("Connected to Wi-Fi: ");
+  Serial.println(WiFi.SSID());
+  delay(100);
+  Serial.print("\n");
+  Serial.println("Starting ESP8266 Web Server...");
+  espServer.begin(); /* Start the HTTP web Server */
+  Serial.println("ESP8266 Web Server Started");
+  Serial.print("\n");
+  Serial.print("The URL of ESP8266 Web Server is: ");
+  Serial.print("http://");
+  Serial.println(WiFi.localIP());
+  Serial.print("\n");
+  Serial.println("Use the above URL in your Browser to access ESP8266 Web Server\n");
+}
+
+
+/**
+ * @brief A function to create a web page for the security system
+ * 
+ * @param armed check if the alarm is armed
+ * @param breakein check if there is a break-in
+ * @param tag display the last tag registered
+ */
+
+void Websiteloop(bool* armed, bool* breakein, String tag) {
+  client = espServer.available(); /* Check if a client is available */
+  if (!client) {
+    return;
+  }
+
+  Serial.println("New Client!!!");
+
+  String request = client.readStringUntil('\r'); /* Read the first line of the request from client */
+  Serial.println(request);                       /* Print the request on the Serial monitor */
+  /* The request is in the form of HTTP GET Method */
+  client.flush();
+
+  /* Extract the URL of the request */
+  if (request.indexOf("/armedON") != -1) {
+    Serial.println("The alarm is armed");
+    *armed = true;
+  }
+  if (request.indexOf("/armedOFF") != -1) {
+    Serial.println("The alarm is disarmed");
+    *armed = false;
+  }
+  if (request.indexOf("/breakeinON") != -1) {
+    Serial.println("There is a break-in");
+    //*armed = true;
+    *breakein = true;
+  }
+  if (request.indexOf("/breakeinOFF") != -1) {
+    Serial.println("No break-in detected");
+    *breakein = false;
+  }
+
+  /* HTTP Response in the form of HTML Web Page */
+  client.println("HTTP/1.1 200 OK");
+  client.println("Content-Type: text/html");
+  client.println();  //  IMPORTANT
+  client.println("<!DOCTYPE HTML>");
+  client.println("<html>");
+  client.println("<head>");
+  client.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+  client.println("<link rel=\"icon\" href=\"data:,\">");
+  /* CSS Styling for Buttons and Web Page */
+  client.println("<style>");
+  client.println("html { font-family: Courier New; display: inline-block; margin: 0px auto; text-align: center;}");
+  client.println(".button {border: none; color: white; padding: 10px 20px; text-align: center;");
+  client.println("text-decoration: none; font-size: 25px; margin: 2px; cursor: pointer;}");
+  client.println(".button1 {background-color: #00FF00;}");
+  client.println(".button2 {background-color: #FF0000;}");
+  client.println("</style>");
+  client.println("</head>");
+
+  /* The main body of the Web Page */
+  client.println("<body>");
+  client.println("<h2>Security system</h2>");
+
+  if (*armed == false) {
+    client.println("<p>Security system is disarmed</p>");
+    client.print("<p><a href=\"/armedON\"><button class=\"button button1\">Arm</button></a></p>");
+  } else {
+    client.println("<p>Security system is armed</p>");
+    client.print("<p><a href=\"/armedOFF\"><button class=\"button button2\">Disarm</button></a></p>");
+  }
+
+  if (*breakein == false) {
+    client.println("<p>alarm is ide</p>");
+    client.print("<p><a href=\"/breakeinON\"><button class=\"button button1\">turn ON </button></a></p>");
+  } else {
+    client.println("<p style=\"color: #FFFFFF; background-color:#FF0000;\">Breakin detekted</p>");
+    client.print("<p><a href=\"/breakeinOFF\"><button class=\"button button2\">Click to turn OFF</button></a></p>");
+  }
+
+  client.println("<p>Last tag registered</p>");
+  client.print("<p>");
+  client.print(tag);
+  client.print("</p>");
+
+  client.println("<script>setTimeout(function(){window.location.href = '/' ;}, 5000); </script>");  //auto refresh
+
+  client.println("</body>");
+  client.println("</html>");
+  client.print("\n");
+
+  /* Close the connection */
+  //client.stop();
+  //Serial.println("Client disconnected");
+  //Serial.print("\n");
+}
+
+
+
+
+
+
+
+
 
 void setDataInt(unsigned int field, int value){
   int x = 0;
@@ -214,12 +316,8 @@ void initAlarm(int Red_LedPin,int Green_LedPin, int BuzzerPin,int Button_Pin){
 void alarm_sound(int Red_LedPin,int Green_LedPin, int BuzzerPin){
       digitalWrite(Red_LedPin, HIGH);
       digitalWrite(Green_LedPin, HIGH);
-      digitalWrite(buzzerPin, HIGH);
-      delay(10);
-      digitalWrite(Red_LedPin, LOW);
-      digitalWrite(Green_LedPin, LOW);
-      digitalWrite(buzzerPin, LOW);
-      delay(10);
+      analogWrite(buzzerPin, 150);
+
 }
 
 void alarm_on_sound_but_no_sound(int Red_LedPin,int Green_LedPin, int BuzzerPin){
