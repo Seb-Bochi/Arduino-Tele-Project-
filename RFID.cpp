@@ -1,25 +1,38 @@
-/* V1.0. RFID_code
- * This program stores a number of electronic keys UIDs. 
- * Using the RFID-RC522 module to read cards and keys.
- * Check if the card or keys UID has access or should be denied. 
- *
- * So far two values is calculated, an approved value, that can be 1 or 0, depending of access was approved or denied. 
- * The UID of the card or key 
- *
- * Futher work: Make the ESP8288 send the UID and approved flag to another ESP8288. 
-
-
+/* RFID_code
+ * This code is resposible for handling the initialization and operation of the RFID module.
+ * It can detect, read and validate tags using the MFRC522 RFID reader.
+  
+ * Dependencies:
+ * - The code depends on the MFRC522 library for interacting with the RFID reader.
+ * - It also uses the Arduino `SPI` library for communication with the RFID module.
 */
+
+
 #include "RFID.h"
 #include <Arduino.h>
 
-void RFIDsetup() {
 
-   
+/* 
+ ** RFIDsetup**
+ * This function handles the initialization of the MFRC522 module. 
+*/
+
+void RFIDsetup() {
+ 
     SPI.begin();         // Initiate SPI bus
     mfrc522.PCD_Init();  // Initiate MFRC522
     delay(4);
 }
+
+/* 
+ ** RFIDResult readUID**
+ * This function reads the UID of a detected RFID tag. 
+ * The UID is constructed as a hexadecimal.  
+ * The detected UID is comapred against a predefined list of UIDs
+ * If a match is found the approved field of return is set to 1. 
+ * The UID is stored in the content field of return as a String. 
+*/
+
 
 RFIDResult readUID() {
     RFIDResult result;  // Create a struct to hold the result

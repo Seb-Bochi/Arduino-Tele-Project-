@@ -1,3 +1,24 @@
+/* This is the  main code for node 2. Its functions are: 
+ * 1. To monitor input from RFID and a photoresister.
+ * 2. To use the ESP8288 to transmit the sensor data wireless to another ESP8288 using ESP-NOW. 
+ * 
+ * Features:
+ * RFID reader, that reads the UID of a tag. Tags with allowed access transmit a "flag" that can be used by another ESP8288. 
+ * The UID is also trasmitted. The allowed UIDs is predefined in the code. 
+ * The photo resister transmit a flag if activated. 
+ *
+ * Debugging: 
+ * The code outputs sensor status, RFID alarm status and the UID to the serial monitor. 
+ *
+ * Note: 
+ * The MAC address for the resieving ESP is stored in this code. 
+
+*/
+
+
+
+
+
 #include "RFID.h"
 #include <Arduino.h>
 #include "lightSensor.h"
@@ -12,11 +33,13 @@ struct CustomData {
     String UID; 
 };
 
+
+
 // MAC address variable
 uint8_t broadcastAddress[6] = {0xdc, 0x4f, 0x22, 0x18, 0xea, 0x8a};
 
 
-String knownUIDs[] = { "4D 02 8A 3F", "93 14 F4 E1" };
+String knownUIDs[] = { "4D028A3F", "9314F4E1" };
 
 int photopin = A0;
 int calibrated_Photoresistor = 0;
@@ -45,9 +68,12 @@ void loop() {
 
 
   CustomData dataToSend;
+      //dataToSend.RFIDAlarm = result.approved;
       dataToSend.RFIDAlarm = result.approved;
       dataToSend.lightSensorAlarm = alarmPhoto;
       dataToSend.UID = result.content;
+     
+      
 
       Serial.print("Light sensor: ");
       Serial.println(alarmPhoto);
