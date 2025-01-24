@@ -106,18 +106,19 @@ $(function(){initNavTree('light_sensor_8h_source.html',''); initResizable(true);
   <div class="headertitle"><div class="title">lightSensor.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef lightSensor_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define lightSensor_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#a4341d41214716956b2f5626f0c326593">read_Photoresistor</a>(<span class="keywordtype">int</span> pin);</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#a37837eb2ebe796099fe55e03120ea0e8">initialize_Photoresistor</a>(<span class="keywordtype">int</span> pin);</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#aff4040dfad5d9fc27283fbd44129cec5">calibrate_Photoresistor</a>(<span class="keywordtype">int</span> pin);</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#af3cd3da50dbdf435c0a3e4ae4f569a16">check_for_change_Photoresistor</a>(<span class="keywordtype">int</span> Photoresistor_value,<span class="keywordtype">int</span> calibration,<span class="keywordtype">int</span> threeshold);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif </span></div>
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#ifndef lightSensor_H</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#define lightSensor_H</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#a4341d41214716956b2f5626f0c326593">read_Photoresistor</a>(<span class="keywordtype">int</span> pin);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#a37837eb2ebe796099fe55e03120ea0e8">initialize_Photoresistor</a>(<span class="keywordtype">int</span> pin);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#aff4040dfad5d9fc27283fbd44129cec5">calibrate_Photoresistor</a>(<span class="keywordtype">int</span> pin);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">int</span> <a class="code hl_function" href="light_sensor_8cpp.html#af3cd3da50dbdf435c0a3e4ae4f569a16">check_for_change_Photoresistor</a>(<span class="keywordtype">int</span> Photoresistor_value,<span class="keywordtype">int</span> calibration,<span class="keywordtype">int</span> threeshold);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif </span></div>
 <div class="ttc" id="alight_sensor_8cpp_html_a37837eb2ebe796099fe55e03120ea0e8"><div class="ttname"><a href="light_sensor_8cpp.html#a37837eb2ebe796099fe55e03120ea0e8">initialize_Photoresistor</a></div><div class="ttdeci">int initialize_Photoresistor(int pin)</div><div class="ttdoc">function to initialize the photoresistor</div><div class="ttdef"><b>Definition</b> lightSensor.cpp:30</div></div>
 <div class="ttc" id="alight_sensor_8cpp_html_a4341d41214716956b2f5626f0c326593"><div class="ttname"><a href="light_sensor_8cpp.html#a4341d41214716956b2f5626f0c326593">read_Photoresistor</a></div><div class="ttdeci">int read_Photoresistor(int pin)</div><div class="ttdoc">function to read the value of the photoresistor</div><div class="ttdef"><b>Definition</b> lightSensor.cpp:19</div></div>
 <div class="ttc" id="alight_sensor_8cpp_html_af3cd3da50dbdf435c0a3e4ae4f569a16"><div class="ttname"><a href="light_sensor_8cpp.html#af3cd3da50dbdf435c0a3e4ae4f569a16">check_for_change_Photoresistor</a></div><div class="ttdeci">int check_for_change_Photoresistor(int Photoresistor_value, int calibration, int threeshold)</div><div class="ttdoc">check if the photoresistor value has changed significantly</div><div class="ttdef"><b>Definition</b> lightSensor.cpp:61</div></div>
