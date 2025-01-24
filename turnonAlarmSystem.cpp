@@ -1,11 +1,11 @@
 /**
  * @file turnonAlarmSystem.cpp
- * @author your name (you@domain.com)
- * @brief 
+ * @author Hákon Hlynsson  (s225765@dtu.dk)
+ * @brief  source file for the alarm system
  * @version 1.0
  * @date 2025-01-15
  * 
- * @copyright Copyright (c) 2025
+ * @copyright open source
  * 
  */
 #include "turnOnAlarmSystem.h"

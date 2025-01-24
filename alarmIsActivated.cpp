@@ -1,6 +1,6 @@
 /**
  * @file alarmIsActivated.cpp
- * @author your name (you@domain.com)
+ * @author Hákon Hlynsson  (s225765@dtu.dk)
  * @brief file for activating the alarm
  * @version 1.0
  * @date 2025-01-24
