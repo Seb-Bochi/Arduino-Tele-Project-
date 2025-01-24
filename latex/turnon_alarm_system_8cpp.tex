@@ -1,0 +1,78 @@
+\doxysection{turnon\+Alarm\+System.\+cpp File Reference}
+\hypertarget{turnon_alarm_system_8cpp}{}\label{turnon_alarm_system_8cpp}\index{turnonAlarmSystem.cpp@{turnonAlarmSystem.cpp}}
+{\ttfamily \#include "{}turn\+On\+Alarm\+System.\+h"{}}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{turnon_alarm_system_8cpp_ace0e2db74e22c45ff83d3b288a373c5d}{init\+Alarm\+System}} (int button\+Pin, int led\+Pin)
+\begin{DoxyCompactList}\small\item\em initialize the the pins for the alarm system \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{turnon_alarm_system_8cpp_a3bb1630d8f4012f2ba29fa6f4b9c69c7}{handle\+Alarm\+System}} (int button\+Pin, int led\+Pin)
+\begin{DoxyCompactList}\small\item\em handle the alarm system \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{turnon_alarm_system_8cpp_a5002611f83f5a861df12917dd5651db8}\label{turnon_alarm_system_8cpp_a5002611f83f5a861df12917dd5651db8} 
+int {\bfseries button\+State} = 0
+\item 
+\Hypertarget{turnon_alarm_system_8cpp_a66f761d0471e843051f3c49af5a1cb82}\label{turnon_alarm_system_8cpp_a66f761d0471e843051f3c49af5a1cb82} 
+int {\bfseries last\+Button\+State} = 0
+\item 
+\Hypertarget{turnon_alarm_system_8cpp_a6bca96572a37f9b51ccae0fa72f57aba}\label{turnon_alarm_system_8cpp_a6bca96572a37f9b51ccae0fa72f57aba} 
+int {\bfseries led\+State} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+your name (\href{mailto:you@domain.com}{\texttt{ you@domain.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/15
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{turnon_alarm_system_8cpp_a3bb1630d8f4012f2ba29fa6f4b9c69c7}\index{turnonAlarmSystem.cpp@{turnonAlarmSystem.cpp}!handleAlarmSystem@{handleAlarmSystem}}
+\index{handleAlarmSystem@{handleAlarmSystem}!turnonAlarmSystem.cpp@{turnonAlarmSystem.cpp}}
+\doxysubsubsection{\texorpdfstring{handleAlarmSystem()}{handleAlarmSystem()}}
+{\footnotesize\ttfamily \label{turnon_alarm_system_8cpp_a3bb1630d8f4012f2ba29fa6f4b9c69c7} 
+int handle\+Alarm\+System (\begin{DoxyParamCaption}\item[{int}]{button\+Pin}{, }\item[{int}]{led\+Pin}{}\end{DoxyParamCaption})}
+
+
+
+handle the alarm system 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button\+Pin} & the pin for the button \\
+\hline
+{\em led\+Pin} & the pin for the led \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int the state of the led 
+\end{DoxyReturn}
+\Hypertarget{turnon_alarm_system_8cpp_ace0e2db74e22c45ff83d3b288a373c5d}\index{turnonAlarmSystem.cpp@{turnonAlarmSystem.cpp}!initAlarmSystem@{initAlarmSystem}}
+\index{initAlarmSystem@{initAlarmSystem}!turnonAlarmSystem.cpp@{turnonAlarmSystem.cpp}}
+\doxysubsubsection{\texorpdfstring{initAlarmSystem()}{initAlarmSystem()}}
+{\footnotesize\ttfamily \label{turnon_alarm_system_8cpp_ace0e2db74e22c45ff83d3b288a373c5d} 
+void init\+Alarm\+System (\begin{DoxyParamCaption}\item[{int}]{button\+Pin}{, }\item[{int}]{led\+Pin}{}\end{DoxyParamCaption})}
+
+
+
+initialize the the pins for the alarm system 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button\+Pin} & the pin for the button \\
+\hline
+{\em led\+Pin} & the pin for the led \\
+\hline
+\end{DoxyParams}

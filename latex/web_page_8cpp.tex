@@ -1,0 +1,73 @@
+\doxysection{web\+Page.\+cpp File Reference}
+\hypertarget{web_page_8cpp}{}\label{web_page_8cpp}\index{webPage.cpp@{webPage.cpp}}
+
+
+source file for the web page  
+
+
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$NTPClient.\+h$>$}\newline
+{\ttfamily \#include $<$Web\+Page.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{web_page_8cpp_a8076bb7801865f25f4a4e92745c49576}{website\+Begin}} (const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}ssid, const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}password)
+\begin{DoxyCompactList}\small\item\em A function to connect the ESP8266 to the Wi-\/\+Fi network and start the web server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{web_page_8cpp_a4b9cd1ae80695fdef143c5bb6b4ed47a}{Websiteloop}} (bool \texorpdfstring{$\ast$}{*}armed, bool \texorpdfstring{$\ast$}{*}breakein, String tag)
+\begin{DoxyCompactList}\small\item\em A function to create a web page for the security system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+source file for the web page 
+
+\begin{DoxyAuthor}{Author}
+Magnus Ludsgaard(\href{mailto:s234393@dtu.dk}{\texttt{ s234393@dtu.\+dk}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/24
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+open source 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{web_page_8cpp_a8076bb7801865f25f4a4e92745c49576}\index{webPage.cpp@{webPage.cpp}!websiteBegin@{websiteBegin}}
+\index{websiteBegin@{websiteBegin}!webPage.cpp@{webPage.cpp}}
+\doxysubsubsection{\texorpdfstring{websiteBegin()}{websiteBegin()}}
+{\footnotesize\ttfamily \label{web_page_8cpp_a8076bb7801865f25f4a4e92745c49576} 
+void website\+Begin (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{ssid}{, }\item[{const char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{password}{}\end{DoxyParamCaption})}
+
+
+
+A function to connect the ESP8266 to the Wi-\/\+Fi network and start the web server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ssid} & the name of the Wi-\/\+Fi network \\
+\hline
+{\em password} & the password of the Wi-\/\+Fi network \\
+\hline
+\end{DoxyParams}
+\Hypertarget{web_page_8cpp_a4b9cd1ae80695fdef143c5bb6b4ed47a}\index{webPage.cpp@{webPage.cpp}!Websiteloop@{Websiteloop}}
+\index{Websiteloop@{Websiteloop}!webPage.cpp@{webPage.cpp}}
+\doxysubsubsection{\texorpdfstring{Websiteloop()}{Websiteloop()}}
+{\footnotesize\ttfamily \label{web_page_8cpp_a4b9cd1ae80695fdef143c5bb6b4ed47a} 
+void Websiteloop (\begin{DoxyParamCaption}\item[{bool \texorpdfstring{$\ast$}{*}}]{armed}{, }\item[{bool \texorpdfstring{$\ast$}{*}}]{breakein}{, }\item[{String}]{tag}{}\end{DoxyParamCaption})}
+
+
+
+A function to create a web page for the security system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em armed} & check if the alarm is armed \\
+\hline
+{\em breakein} & check if the alarm is triggered \\
+\hline
+{\em tag} & display the last tag registered \\
+\hline
+\end{DoxyParams}

@@ -1,3 +1,13 @@
+/**
+ * @file senderESP.h
+ * @author Sebastian Bochineck (s224014@dtu.dk)
+ * @brief 
+ * @version 1.0
+ * @date 2025-01-16
+ * 
+ * @copyright open source
+ * 
+ */
 #ifndef senderESP_H
 #define senderESP_H
 

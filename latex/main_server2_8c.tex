@@ -1,0 +1,77 @@
+\doxysection{main\+Server2.\+c File Reference}
+\hypertarget{main_server2_8c}{}\label{main_server2_8c}\index{mainServer2.c@{mainServer2.c}}
+
+
+th½is is the main file for the master esp  
+
+
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include "{}light\+Sensor.\+h"{}}\newline
+{\ttfamily \#include "{}sender\+ESP.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_custom_data}{Custom\+Data}}
+\begin{DoxyCompactList}\small\item\em A struct to store the data to be sent to the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_server2_8c_a86fac98c9b4c98a3e50fc45440878391}\label{main_server2_8c_a86fac98c9b4c98a3e50fc45440878391} 
+\#define {\bfseries SS\+\_\+\+PIN}~D8
+\item 
+\Hypertarget{main_server2_8c_a36932b0e869e0114f32e255f61306d6b}\label{main_server2_8c_a36932b0e869e0114f32e255f61306d6b} 
+\#define {\bfseries RST\+\_\+\+PIN}~D2
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_server2_8c_ac672f817299d07cc428fe3f456235273}\label{main_server2_8c_ac672f817299d07cc428fe3f456235273} 
+MFRC522 {\bfseries mfrc522} (SS\+\_\+\+PIN, RST\+\_\+\+PIN)
+\item 
+\Hypertarget{main_server2_8c_a4fc01d736fe50cf5b977f755b675f11d}\label{main_server2_8c_a4fc01d736fe50cf5b977f755b675f11d} 
+void {\bfseries setup} ()
+\begin{DoxyCompactList}\small\item\em the setup function of the program \end{DoxyCompactList}\item 
+\Hypertarget{main_server2_8c_afe461d27b9c48d5921c00d521181f12f}\label{main_server2_8c_afe461d27b9c48d5921c00d521181f12f} 
+void {\bfseries loop} ()
+\begin{DoxyCompactList}\small\item\em the main loop of the program \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_server2_8c_abd1a2fe48e4e7a250bcc839ec97a9e49}\label{main_server2_8c_abd1a2fe48e4e7a250bcc839ec97a9e49} 
+uint8\+\_\+t {\bfseries broadcast\+Address} \mbox{[}6\mbox{]} = \{0xdc, 0x4f, 0x22, 0x18, 0xea, 0x8a\}
+\item 
+\Hypertarget{main_server2_8c_a014c890c0a8d0abba265e605ec431b6e}\label{main_server2_8c_a014c890c0a8d0abba265e605ec431b6e} 
+String {\bfseries known\+UIDs} \mbox{[}$\,$\mbox{]} = \{ "{}4D 02 8A 3F"{}, "{}93 14 F4 E1"{} \}
+\item 
+\Hypertarget{main_server2_8c_ab66a7895ec9fec6462b32c7b55cc6984}\label{main_server2_8c_ab66a7895ec9fec6462b32c7b55cc6984} 
+int {\bfseries photopin} = A0
+\item 
+\Hypertarget{main_server2_8c_adfb77050114b4edfd6df8858aac4362d}\label{main_server2_8c_adfb77050114b4edfd6df8858aac4362d} 
+int {\bfseries calibrated\+\_\+\+Photoresistor} = 0
+\item 
+\Hypertarget{main_server2_8c_a3b3437aafb466ee0fcbf97f64c98b8c2}\label{main_server2_8c_a3b3437aafb466ee0fcbf97f64c98b8c2} 
+int {\bfseries value\+\_\+\+Photoresistor} =0
+\item 
+\Hypertarget{main_server2_8c_a6ca93daba6ffb5e00dae8b5c4c6e0477}\label{main_server2_8c_a6ca93daba6ffb5e00dae8b5c4c6e0477} 
+int {\bfseries threeshold\+\_\+\+Photoresistor} =100
+\item 
+\Hypertarget{main_server2_8c_a11860bc3fe7d491812b6033e0460ae61}\label{main_server2_8c_a11860bc3fe7d491812b6033e0460ae61} 
+int {\bfseries alarm\+\_\+sound\+\_\+2} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+th½is is the main file for the master esp 
+
+\begin{DoxyAuthor}{Author}
+Lauge Brandt (\href{mailto:s221215@dtu.dk}{\texttt{ s221215@dtu.\+dk}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/19
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+open source 
+\end{DoxyCopyright}

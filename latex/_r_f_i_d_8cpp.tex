@@ -1,0 +1,64 @@
+\doxysection{RFID.\+cpp File Reference}
+\hypertarget{_r_f_i_d_8cpp}{}\label{_r_f_i_d_8cpp}\index{RFID.cpp@{RFID.cpp}}
+
+
+This program stores a number of electronic keys UIDs.  
+
+
+{\ttfamily \#include "{}RFID.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_r_f_i_d_8cpp_ac672f817299d07cc428fe3f456235273}\label{_r_f_i_d_8cpp_ac672f817299d07cc428fe3f456235273} 
+MFRC522 {\bfseries mfrc522} (SS\+\_\+\+PIN, RST\+\_\+\+PIN)
+\item 
+\Hypertarget{_r_f_i_d_8cpp_a1bbfef929a4959f12420b0fe38cdd62e}\label{_r_f_i_d_8cpp_a1bbfef929a4959f12420b0fe38cdd62e} 
+void {\bfseries RFIDsetup} ()
+\begin{DoxyCompactList}\small\item\em function to setup the RFID module and serial communication \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_r_f_i_d_result}{RFIDResult}} \mbox{\hyperlink{_r_f_i_d_8cpp_a4bb49bb61c1fc360299eeb637a5e49c3}{read\+UID}} ()
+\begin{DoxyCompactList}\small\item\em function to read the UID of a card and check if it is approved \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_r_f_i_d_8cpp_a014c890c0a8d0abba265e605ec431b6e}\label{_r_f_i_d_8cpp_a014c890c0a8d0abba265e605ec431b6e} 
+String {\bfseries known\+UIDs} \mbox{[}$\,$\mbox{]} = \{ "{}4D 02 8A 3F"{}, "{}93 14 F4 E1"{} \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This program stores a number of electronic keys UIDs. 
+
+\begin{DoxyAuthor}{Author}
+Lauge Brandt (\href{mailto:s221215@dtu.dk}{\texttt{ s221215@dtu.\+dk}})
+\end{DoxyAuthor}
+Using the RFID-\/\+RC522 module to read cards and keys.
+
+Check if the card or keys UID has access or should be denied. \begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/24
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+open source
+\end{DoxyCopyright}
+Using the RFID-\/\+RC522 module to read cards and keys. Check if the card or keys UID has access or should be denied.
+
+So far two values is calculated, an approved value, that can be 1 or 0, depending of access was approved or denied. The UID of the card or key
+
+Futher work\+: Make the ESP8288 send the UID and approved flag to another ESP8288. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_r_f_i_d_8cpp_a4bb49bb61c1fc360299eeb637a5e49c3}\index{RFID.cpp@{RFID.cpp}!readUID@{readUID}}
+\index{readUID@{readUID}!RFID.cpp@{RFID.cpp}}
+\doxysubsubsection{\texorpdfstring{readUID()}{readUID()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8cpp_a4bb49bb61c1fc360299eeb637a5e49c3} 
+\mbox{\hyperlink{struct_r_f_i_d_result}{RFIDResult}} read\+UID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+function to read the UID of a card and check if it is approved 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_r_f_i_d_result}{RFIDResult} the result of the RFID reading 
+\end{DoxyReturn}

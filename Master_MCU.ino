@@ -1,4 +1,13 @@
-#include <ESP8266WiFi.h>
+/**
+ * @file Master_MCU.ino
+ * @author Hákon Hlynsson (s225765@dtu.dk)
+ * @brief this is the main file for the master esp
+ * @version 1.0
+ * @date 2025-01-19
+ * 
+ * @copyright open source
+ * 
+ */
 #include <espnow.h>
 
 const int ledPinRed = D3;
@@ -10,13 +19,22 @@ bool burglary = false;
 int alarm=false;
 int prev_buttonState = false;
 
-
+/**
+ * @brief struct to hold the data from device 2
+ *
+ * 
+ */
 typedef struct Device2_message {
     int Detected_Light;
     int RFID_Access;
     float UID;
 } Device2_message;
 
+/**
+ * @brief struct to hold the data from device 1
+ *
+ * 
+ */
 typedef struct Device1_message {
     int Detected_Sound;
     int Detected_Motion;
@@ -28,6 +46,14 @@ Device1_message Device1;
 Device2_message Device2;
 
 // Callback function that will be executed when data is received
+
+/**
+ * @brief function to handle the data received from the other esp
+ * 
+ * @param mac mac address of the sender
+ * @param incomingData incoming data from the sender
+ * @param len length of the incoming data 
+ */
 void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
   // Convert MAC address to human-readable string
   char macStr[18];
@@ -120,7 +146,14 @@ if (New_messege){ // gets a messenge from the other esp
   
 }
 
-
+/**
+ * @brief initialize the alarm system
+ * 
+ * @param Red_LedPin the pin for the red led
+ * @param Green_LedPin the pin for the green led
+ * @param BuzzerPin the pin for the buzzer
+ * @param Button_Pin the pin for the button
+ */
 void initAlarm(int Red_LedPin,int Green_LedPin, int BuzzerPin,int Button_Pin){
   pinMode(Button_Pin, INPUT_PULLUP);
   pinMode(Red_LedPin, OUTPUT);
@@ -128,6 +161,13 @@ void initAlarm(int Red_LedPin,int Green_LedPin, int BuzzerPin,int Button_Pin){
   pinMode(BuzzerPin, OUTPUT);
 }
 
+/**
+ * @brief function to make the alarm sound
+ * 
+ * @param Red_LedPin the pin for the red led
+ * @param Green_LedPin the pin for the green led
+ * @param BuzzerPin the pin for the buzzer
+ */
 void alarm_sound(int Red_LedPin,int Green_LedPin, int BuzzerPin){
       digitalWrite(Red_LedPin, HIGH);
       digitalWrite(Green_LedPin, HIGH);
@@ -138,19 +178,38 @@ void alarm_sound(int Red_LedPin,int Green_LedPin, int BuzzerPin){
       digitalWrite(buzzerPin, LOW);
       delay(10);
 }
-
+/**
+ * @brief alarm on but no sound
+ * 
+ * @param Red_LedPin the pin for the red led
+ * @param Green_LedPin the pin for the green led
+ * @param BuzzerPin the pin for the buzzer
+ */
 void alarm_on_sound_but_no_sound(int Red_LedPin,int Green_LedPin, int BuzzerPin){
       digitalWrite(Red_LedPin, HIGH);
       digitalWrite(Green_LedPin, LOW);
       digitalWrite(buzzerPin, LOW);
 }
 
+/**
+ * @brief alarm off
+ * 
+ * @param Red_LedPin  red led pin
+ * @param Green_LedPin green led pin
+ * @param BuzzerPin buzzer pin
+ */
 void alarm_off(int Red_LedPin,int Green_LedPin, int BuzzerPin){
   digitalWrite(Red_LedPin, LOW);
   digitalWrite(Green_LedPin, HIGH);
   digitalWrite(buzzerPin, LOW);
 }
 
+/**
+ * @brief function to check if the button is pressed
+ * 
+ * @param Button_Pin the pin for the button
+ * @return int true if the button is pressed
+ */
 int check_button(int Button_Pin){
   // Read the current state of the pushbutton
    int buttonState = digitalRead(Button_Pin);

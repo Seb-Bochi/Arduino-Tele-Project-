@@ -1,4 +1,13 @@
-#include "RFID.h"
+/**
+ * @file mainServer2.c
+ * @author Lauge Brandt (s221215@dtu.dk)
+ * @brief th½is is the main file for the master esp
+ * @version 1.0
+ * @date 2025-01-19
+ * 
+ * @copyright open source
+ * 
+ */
 #include <Arduino.h>
 #include "lightSensor.h"
 #include "senderESP.h"
@@ -6,6 +15,10 @@
 #define SS_PIN D8
 #define RST_PIN D2
 
+/**
+ * @brief A struct to store the data to be sent to the 2nd ESP
+ * 
+ */
 struct CustomData {
     int RFIDAlarm;
     int lightSensorAlarm;
@@ -24,7 +37,10 @@ int threeshold_Photoresistor=100;
 int alarm_sound_2 = 0; 
 
 MFRC522 mfrc522(SS_PIN, RST_PIN);
-
+/**
+ * @brief the setup function of the program
+ * 
+ */
 void setup() {
     Serial.begin(9600);
     RFIDsetup();  // Initialize RFID module
@@ -32,7 +48,10 @@ void setup() {
     initESPNow();
     registerPeer(broadcastAddress);
 }
-
+/**
+ * @brief the main loop of the program
+ * 
+ */
 void loop() {
   int value_Photoresistor = read_Photoresistor(photopin);
   int alarmPhoto = check_for_change_Photoresistor(value_Photoresistor, calibrated_Photoresistor, threeshold_Photoresistor);

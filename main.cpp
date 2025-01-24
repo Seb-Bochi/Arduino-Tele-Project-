@@ -1,3 +1,13 @@
+/**
+ * @file main.cpp
+ * @author Hákon Hlynsson (s225765@dtu.dk)
+ * @brief main file for the alarm system
+ * @version 1.0
+ * @date 2025-01-24
+ * 
+ * @copyright open source
+ * 
+ */
 #include "turnOnAlarmSystem.h"
 #include "alarmIsActivated.h"
 #include "ultrasonicSensor.h"
@@ -12,6 +22,10 @@ const int echoPin = 10;
 
 int alarmIsOn = 0;
 
+/**
+ * @brief setup function for the alarm system
+ * 
+ */
 void setup (){
   initAlarmSystem (buttonPin, ledPinGreen);
   initAlarmIsActivated(buttonPin, ledPinRed, buzzerPin);
@@ -19,7 +33,10 @@ void setup (){
 
   Serial.begin(9600);
 }
-
+/**
+ * @brief loop function for the alarm system
+ * 
+ */
 void loop(){
 
   int ledState = handleAlarmSystem(buttonPin, ledPinGreen);

@@ -1,15 +1,23 @@
-/* V1.0. RFID_code
- * This program stores a number of electronic keys UIDs. 
+/**
+ * @file RFID.cpp
+ * @author Lauge Brandt (s221215@dtu.dk)
+ * @brief This program stores a number of electronic keys UIDs. 
+ * @brief Using the RFID-RC522 module to read cards and keys.
+ * @brief Check if the card or keys UID has access or should be denied.
+ * @version 1.0
+ * @date 2025-01-24
+ * 
+ * @copyright open source
+ * 
  * Using the RFID-RC522 module to read cards and keys.
  * Check if the card or keys UID has access or should be denied. 
- *
- * So far two values is calculated, an approved value, that can be 1 or 0, depending of access was approved or denied. 
- * The UID of the card or key 
- *
+ * 
+ *  So far two values is calculated, an approved value, that can be 1 or 0, depending of access was approved or denied. 
+ *  The UID of the card or key 
+ * 
  * Futher work: Make the ESP8288 send the UID and approved flag to another ESP8288. 
+ */
 
-
-*/
 #include "RFID.h"
 #include <Arduino.h>
 

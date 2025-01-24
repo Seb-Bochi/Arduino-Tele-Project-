@@ -1,0 +1,31 @@
+\doxysection{RFID.\+h}
+\hypertarget{_r_f_i_d_8h_source}{}\label{_r_f_i_d_8h_source}\mbox{\hyperlink{_r_f_i_d_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ RFID\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ RFID\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <SPI.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <MFRC522.h>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ Structure\ to\ hold\ RFID\ results}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_r_f_i_d_result}{RFIDResult}}\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ uint8\_t\ approved;\ \ \ \textcolor{comment}{//\ 1\ if\ approved,\ 0\ otherwise}}
+\DoxyCodeLine{00027\ \ \ \ \ String\ content;\ \ \ \ \ \textcolor{comment}{//\ UID\ of\ the\ detected\ card}}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ Extern\ declarations\ for\ knownUIDs\ and\ its\ size}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{extern}\ String\ knownUIDs[];}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ Declare\ functions}}
+\DoxyCodeLine{00035\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_r_f_i_d_8h_a1bbfef929a4959f12420b0fe38cdd62e}{RFIDsetup}}();}
+\DoxyCodeLine{00036\ \mbox{\hyperlink{struct_r_f_i_d_result}{RFIDResult}}\ \mbox{\hyperlink{_r_f_i_d_8h_a4bb49bb61c1fc360299eeb637a5e49c3}{readUID}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ Declare\ the\ RFID\ instance\ as\ extern}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{extern}\ MFRC522\ mfrc522;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ RFID\_H}}
+
+\end{DoxyCode}

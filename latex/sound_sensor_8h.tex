@@ -1,0 +1,117 @@
+\doxysection{sound\+Sensor.\+h File Reference}
+\hypertarget{sound_sensor_8h}{}\label{sound_sensor_8h}\index{soundSensor.h@{soundSensor.h}}
+
+
+source file for the sound sensor  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{sound_sensor_8h_a64082091b42d7caec8c7e82c4b411de9}{initialize\+\_\+sound}} (int pin)
+\begin{DoxyCompactList}\small\item\em Arduino setup function. Initializes the serial communication and calibrates the sound sensor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sound_sensor_8h_a7052a5de2f586a2b0b06238a138deed5}{Calibration\+\_\+of\+\_\+sound}} ()
+\begin{DoxyCompactList}\small\item\em Calibrates the sound sensor by averaging a 1000 sound readings. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sound_sensor_8h_ad88082869290f82913f0e7a92107b48c}{check\+\_\+for\+\_\+change\+\_\+in\+\_\+sound}} (int Sound\+\_\+\+Value, int Calibration, int thressshold)
+\begin{DoxyCompactList}\small\item\em Checks if the current sound value deviates from the calibration value by more than the threshold. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{sound_sensor_8h_ae4b7e44227e191e74c7a4c452efe3f7a}{read\+\_\+sound\+\_\+value}} ()
+\begin{DoxyCompactList}\small\item\em Reads the sound level from the sensor by averaging multiple analog readings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+source file for the sound sensor 
+
+\begin{DoxyAuthor}{Author}
+Hákon Hlynsson (\href{mailto:s225765@dtu.dk}{\texttt{ s225765@dtu.\+dk}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/16
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{sound_sensor_8h_a7052a5de2f586a2b0b06238a138deed5}\index{soundSensor.h@{soundSensor.h}!Calibration\_of\_sound@{Calibration\_of\_sound}}
+\index{Calibration\_of\_sound@{Calibration\_of\_sound}!soundSensor.h@{soundSensor.h}}
+\doxysubsubsection{\texorpdfstring{Calibration\_of\_sound()}{Calibration\_of\_sound()}}
+{\footnotesize\ttfamily \label{sound_sensor_8h_a7052a5de2f586a2b0b06238a138deed5} 
+int Calibration\+\_\+of\+\_\+sound (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Calibrates the sound sensor by averaging a 1000 sound readings. 
+
+\begin{DoxyReturn}{Returns}
+The calculated calibration value. 
+\end{DoxyReturn}
+\texorpdfstring{$<$}{<} Accumulate sound readings
+
+\texorpdfstring{$<$}{<} Compute running average\Hypertarget{sound_sensor_8h_ad88082869290f82913f0e7a92107b48c}\index{soundSensor.h@{soundSensor.h}!check\_for\_change\_in\_sound@{check\_for\_change\_in\_sound}}
+\index{check\_for\_change\_in\_sound@{check\_for\_change\_in\_sound}!soundSensor.h@{soundSensor.h}}
+\doxysubsubsection{\texorpdfstring{check\_for\_change\_in\_sound()}{check\_for\_change\_in\_sound()}}
+{\footnotesize\ttfamily \label{sound_sensor_8h_ad88082869290f82913f0e7a92107b48c} 
+int check\+\_\+for\+\_\+change\+\_\+in\+\_\+sound (\begin{DoxyParamCaption}\item[{int}]{Sound\+\_\+\+Value}{, }\item[{int}]{Calibration}{, }\item[{int}]{thressshold}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the current sound value deviates from the calibration value by more than the threshold. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Sound\+\_\+\+Value} & The current sound level reading. \\
+\hline
+{\em Calibration} & The baseline calibration value. \\
+\hline
+{\em thressshold} & The threshold for detecting significant sound changes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the sound level change exceeds the threshold; otherwise, false. 
+\end{DoxyReturn}
+\texorpdfstring{$<$}{<} Set alarm if sound level deviates significantly
+
+\texorpdfstring{$<$}{<} No significant deviation detected\Hypertarget{sound_sensor_8h_a64082091b42d7caec8c7e82c4b411de9}\index{soundSensor.h@{soundSensor.h}!initialize\_sound@{initialize\_sound}}
+\index{initialize\_sound@{initialize\_sound}!soundSensor.h@{soundSensor.h}}
+\doxysubsubsection{\texorpdfstring{initialize\_sound()}{initialize\_sound()}}
+{\footnotesize\ttfamily \label{sound_sensor_8h_a64082091b42d7caec8c7e82c4b411de9} 
+int initialize\+\_\+sound (\begin{DoxyParamCaption}\item[{int}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+Arduino setup function. Initializes the serial communication and calibrates the sound sensor. 
+
+Initializes the sound sensor and performs calibration.
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & The analog pin to which the sensor is connected. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The calibration value for the sound sensor. 
+\end{DoxyReturn}
+\texorpdfstring{$<$}{<} Set the sensor pin as an input
+
+\texorpdfstring{$<$}{<} Perform sound calibration\Hypertarget{sound_sensor_8h_ae4b7e44227e191e74c7a4c452efe3f7a}\index{soundSensor.h@{soundSensor.h}!read\_sound\_value@{read\_sound\_value}}
+\index{read\_sound\_value@{read\_sound\_value}!soundSensor.h@{soundSensor.h}}
+\doxysubsubsection{\texorpdfstring{read\_sound\_value()}{read\_sound\_value()}}
+{\footnotesize\ttfamily \label{sound_sensor_8h_ae4b7e44227e191e74c7a4c452efe3f7a} 
+int read\+\_\+sound\+\_\+value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reads the sound level from the sensor by averaging multiple analog readings. 
+
+\begin{DoxyReturn}{Returns}
+The averaged sound level. 
+\end{DoxyReturn}
+\texorpdfstring{$<$}{<} Variable to store analog readings
+
+\texorpdfstring{$<$}{<} Read analog value from sensor
+
+\texorpdfstring{$<$}{<} Compute running average

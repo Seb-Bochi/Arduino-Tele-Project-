@@ -1,3 +1,13 @@
+/**
+ * @file Master_MCU.ino
+ * @author Hákon Hlynsson  (s225765@dtu.dk)
+ * @brief source file for the master esp
+ * @version 1.0
+ * @date 2025-01-16
+ * 
+ * @copyright open source
+ * 
+ */
 #include <ESP8266WiFi.h>
 #include <espnow.h>
 #include <ThingSpeak.h>
@@ -26,11 +36,19 @@ bool burglary = false;
 bool alarm=false;
 int prev_buttonState = false;
 
+/**
+ * @brief struct to hold the data from device 1
+ *
+ * 
+ */
 typedef struct Device1_message {
     int Detected_Sound;
     int Detected_Motion;
 } Device1_message;
-
+/**
+ * @brief struct to hold the data from device 2
+ * 
+ */
 typedef struct Device2_message {
     int RFID_Access;
     int Detected_Light;
@@ -45,6 +63,13 @@ WiFiServer espServer(80); /* Instance of WiFiServer with port number 80 */
 /* 80 is the Port Number for HTTP Web Server */
 
 // Callback function that will be executed when data is received
+/**
+ * @brief This function is called when data is received from the other ESP
+ * 
+ * @param mac the mac address of the sender
+ * @param incomingData the incoming data from the sender
+ * @param len tghe length of the incoming data
+ */
 void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
   // Convert MAC address to human-readable string
   char macStr[18];
@@ -79,6 +104,10 @@ void OnDataRecv(uint8_t *mac, uint8_t *incomingData, uint8_t len) {
   New_messege=true; 
 }
 
+/**
+ * @brief the setup function for the master esp
+ * 
+ */
  
 void setup() {
   // Initialize Serial Monitor
@@ -106,6 +135,10 @@ void setup() {
   ThingSpeak.begin(client2);
   client2.connect(server, 80); //connect(URL, Port)
 }
+/**
+ * @brief the main loop of the program
+ * 
+ */
 void loop() {
   Websiteloop(&alarm,&burglary,Device2.UID);
 
@@ -157,7 +190,12 @@ void loop() {
   //count++;
 }
 
-
+/**
+ * @brief the function to initialize the website
+ * 
+ * @param ssid the ssid of the wifi
+ * @param password  the password of the wifi
+ */
 void websiteBegin(const char** ssid,const char** password ) {
   Serial.print("\n");
   Serial.print("Connecting to: ");
@@ -186,7 +224,7 @@ void websiteBegin(const char** ssid,const char** password ) {
 
 
 /**
- * @brief A function to create a web page for the security system
+ * @brief A function to send the website to the client
  * 
  * @param armed check if the alarm is armed
  * @param breakein check if there is a break-in
@@ -283,11 +321,12 @@ void Websiteloop(bool* armed, bool* breakein, String tag) {
 
 
 
-
-
-
-
-
+/**
+ * @brief send the int to thingspeak
+ * 
+ * @param field the field to send the data to
+ * @param value the value to send to thingspeak
+ */
 
 void setDataInt(unsigned int field, int value){
   int x = 0;
@@ -302,10 +341,20 @@ void setDataInt(unsigned int field, int value){
   }
 }
 
+/**
+ * @brief function to activate the alarm
+ * 
+ * @param field the field to send the data to
+ * @param str the string to send to thingspeak
+ */
 void setAlarm(bool state){
   setDataInt(2, (int)state);
 }
 
+/**
+ * @brief functipn that initializes the alarm pins
+ * 
+ */
 void initAlarm(int Red_LedPin,int Green_LedPin, int BuzzerPin,int Button_Pin){
   pinMode(Button_Pin, INPUT_PULLUP);
   pinMode(Red_LedPin, OUTPUT);
@@ -313,25 +362,51 @@ void initAlarm(int Red_LedPin,int Green_LedPin, int BuzzerPin,int Button_Pin){
   pinMode(BuzzerPin, OUTPUT);
 }
 
+/**
+ * @brief function to make the alarm sound
+ * 
+ * @param Red_LedPin the pin for the red led
+ * @param Green_LedPin the pin for the green led
+ * @param BuzzerPin the pin for the buzzer
+ */
 void alarm_sound(int Red_LedPin,int Green_LedPin, int BuzzerPin){
       digitalWrite(Red_LedPin, HIGH);
       digitalWrite(Green_LedPin, HIGH);
       analogWrite(buzzerPin, 150);
 
 }
-
+/**
+ * @brief function to turn on the alarm but no sound
+ * 
+ * @param Red_LedPin the pin for the red led
+ * @param Green_LedPin the pin for the green led
+ * @param BuzzerPin the pin for the buzzer
+ */
 void alarm_on_sound_but_no_sound(int Red_LedPin,int Green_LedPin, int BuzzerPin){
       digitalWrite(Red_LedPin, HIGH);
       digitalWrite(Green_LedPin, LOW);
       digitalWrite(buzzerPin, LOW);
 }
 
+/**
+ * @brief function to turn off the alarm
+ * 
+ * @param Red_LedPin  red led pin
+ * @param Green_LedPin green led pin
+ * @param BuzzerPin buzzer pin
+ */
 void alarm_off(int Red_LedPin,int Green_LedPin, int BuzzerPin){
   digitalWrite(Red_LedPin, LOW);
   digitalWrite(Green_LedPin, HIGH);
   digitalWrite(buzzerPin, LOW);
 }
 
+/**
+ * @brief function to check if the button is pressed
+ * 
+ * @param Button_Pin the pin for the button
+ * @return true if the button is pressed
+ */
 int check_button(int Button_Pin){
   // Read the current state of the pushbutton
    int buttonState = digitalRead(Button_Pin);
@@ -348,7 +423,12 @@ int check_button(int Button_Pin){
   prev_buttonState = buttonState; 
   return false;
 }
-
+/**
+ * @brief function to set the data as a string
+ * 
+ * @param field the field to send the data to
+ * @param str the string to send to thingspeak
+ */
 void setUIDString(unsigned int field, String str){
   int x = 0;
 
@@ -361,7 +441,10 @@ void setUIDString(unsigned int field, String str){
     Serial.println(x);
   }
 }
-
+/**
+ * @brief function to send the data to thingspeak
+ * 
+ */
 void sendUpdate(){
   int x = 0;
   x = ThingSpeak.writeFields(channelID, writeAPIKey);

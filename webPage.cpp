@@ -1,6 +1,17 @@
+/**
+ * @file webPage.cpp
+ * @author Magnus Ludsgaard(s234393@dtu.dk)
+ * @brief source file for the web page
+ * @version 1.0
+ * @date 2025-01-24
+ * 
+ * @copyright open source
+ * 
+ */
+
 #include <ESP8266WiFi.h>
 #include <NTPClient.h>
-
+#include <WebPage.h>
 
 /**
  * @brief A function to connect the ESP8266 to the Wi-Fi network and start the web server
@@ -39,7 +50,7 @@ void websiteBegin(const char** ssid,const char** password ) {
  * @brief A function to create a web page for the security system
  * 
  * @param armed check if the alarm is armed
- * @param breakein check if there is a break-in
+ * @param breakein check if the alarm is triggered
  * @param tag display the last tag registered
  */
 void Websiteloop(bool* armed, bool* breakein, String tag) {
@@ -48,7 +59,7 @@ void Websiteloop(bool* armed, bool* breakein, String tag) {
     return;
   }
 
-  Serial.println("New Client!!!");
+  Serial.println("New Client!!!"); 
 
   String request = client.readStringUntil('\r'); /* Read the first line of the request from client */
   Serial.println(request);                       /* Print the request on the Serial monitor */

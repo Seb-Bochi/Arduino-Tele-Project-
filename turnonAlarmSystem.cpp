@@ -1,3 +1,13 @@
+/**
+ * @file turnonAlarmSystem.cpp
+ * @author your name (you@domain.com)
+ * @brief 
+ * @version 1.0
+ * @date 2025-01-15
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #include "turnOnAlarmSystem.h"
 #include <Arduino.h>
 
@@ -5,7 +15,12 @@ int buttonState = 0;
 int lastButtonState = 0;
 int ledState = 0;
 
-
+/**
+ * @brief initialize the the pins for the alarm system
+ * 
+ * @param buttonPin the pin for the button
+ * @param ledPin the pin for the led
+ */
 void initAlarmSystem (int buttonPin, int ledPin) {
 
 
@@ -15,6 +30,14 @@ void initAlarmSystem (int buttonPin, int ledPin) {
   pinMode(buttonPin, INPUT);
 }
 
+
+/**
+ * @brief handle the alarm system
+ * 
+ * @param buttonPin the pin for the button
+ * @param ledPin the pin for the led
+ * @return int the state of the led
+ */
 int handleAlarmSystem(int buttonPin, int ledPin) {
   // read the state of the pushbutton value:
 

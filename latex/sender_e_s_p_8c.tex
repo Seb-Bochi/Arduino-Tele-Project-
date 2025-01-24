@@ -1,0 +1,85 @@
+\doxysection{sender\+ESP.\+c File Reference}
+\hypertarget{sender_e_s_p_8c}{}\label{sender_e_s_p_8c}\index{senderESP.c@{senderESP.c}}
+{\ttfamily \#include $<$ESP8266\+Wi\+Fi.\+h$>$}\newline
+{\ttfamily \#include $<$espnow.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{sender_e_s_p_8c_a133b73212cbbae123bc526693056aea4}{on\+Data\+Sent}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}mac\+\_\+addr, uint8\+\_\+t send\+Status)
+\begin{DoxyCompactList}\small\item\em callback function when data is sent \end{DoxyCompactList}\item 
+\Hypertarget{sender_e_s_p_8c_ad6c7f2d6e6a2543023f5266fac54bc8c}\label{sender_e_s_p_8c_ad6c7f2d6e6a2543023f5266fac54bc8c} 
+void {\bfseries init\+ESPNow} ()
+\begin{DoxyCompactList}\small\item\em initialize the ESP-\/\+NOW protocol \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sender_e_s_p_8c_a9d8d7dda9a319cdac83f547b058921ad}{register\+Peer}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}mac\+Address)
+\begin{DoxyCompactList}\small\item\em register a peer to the ESP-\/\+NOW protocol \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{sender_e_s_p_8c_ae89808122397c6c5f2ee521ace0a7bcc}{send\+Data}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}mac\+Address, void \texorpdfstring{$\ast$}{*}data, size\+\_\+t data\+Size)
+\begin{DoxyCompactList}\small\item\em send data to a peer \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Sebastian Bochineck (\href{mailto:s224014@dtu.dk}{\texttt{ s224014@dtu.\+dk}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/16
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+open source 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{sender_e_s_p_8c_a133b73212cbbae123bc526693056aea4}\index{senderESP.c@{senderESP.c}!onDataSent@{onDataSent}}
+\index{onDataSent@{onDataSent}!senderESP.c@{senderESP.c}}
+\doxysubsubsection{\texorpdfstring{onDataSent()}{onDataSent()}}
+{\footnotesize\ttfamily \label{sender_e_s_p_8c_a133b73212cbbae123bc526693056aea4} 
+void on\+Data\+Sent (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{mac\+\_\+addr}{, }\item[{uint8\+\_\+t}]{send\+Status}{}\end{DoxyParamCaption})}
+
+
+
+callback function when data is sent 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mac\+\_\+addr} & mac address of the peer \\
+\hline
+{\em send\+Status} & status of the send \\
+\hline
+\end{DoxyParams}
+\Hypertarget{sender_e_s_p_8c_a9d8d7dda9a319cdac83f547b058921ad}\index{senderESP.c@{senderESP.c}!registerPeer@{registerPeer}}
+\index{registerPeer@{registerPeer}!senderESP.c@{senderESP.c}}
+\doxysubsubsection{\texorpdfstring{registerPeer()}{registerPeer()}}
+{\footnotesize\ttfamily \label{sender_e_s_p_8c_a9d8d7dda9a319cdac83f547b058921ad} 
+void register\+Peer (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{mac\+Address}{}\end{DoxyParamCaption})}
+
+
+
+register a peer to the ESP-\/\+NOW protocol 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mac\+Address} & the mac address of the peer \\
+\hline
+\end{DoxyParams}
+\Hypertarget{sender_e_s_p_8c_ae89808122397c6c5f2ee521ace0a7bcc}\index{senderESP.c@{senderESP.c}!sendData@{sendData}}
+\index{sendData@{sendData}!senderESP.c@{senderESP.c}}
+\doxysubsubsection{\texorpdfstring{sendData()}{sendData()}}
+{\footnotesize\ttfamily \label{sender_e_s_p_8c_ae89808122397c6c5f2ee521ace0a7bcc} 
+void send\+Data (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{mac\+Address}{, }\item[{void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{data\+Size}{}\end{DoxyParamCaption})}
+
+
+
+send data to a peer 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mac\+Address} & the mac address of the peer \\
+\hline
+{\em data} & the data to be sent \\
+\hline
+{\em data\+Size} & the size of the data \\
+\hline
+\end{DoxyParams}

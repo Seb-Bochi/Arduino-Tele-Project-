@@ -1,0 +1,116 @@
+\doxysection{light\+Sensor.\+cpp File Reference}
+\hypertarget{light_sensor_8cpp}{}\label{light_sensor_8cpp}\index{lightSensor.cpp@{lightSensor.cpp}}
+
+
+file for the light sensor  
+
+
+{\ttfamily \#include "{}light\+Sensor.\+h"{}}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{light_sensor_8cpp_a4341d41214716956b2f5626f0c326593}{read\+\_\+\+Photoresistor}} (int pin)
+\begin{DoxyCompactList}\small\item\em function to read the value of the photoresistor \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{light_sensor_8cpp_a37837eb2ebe796099fe55e03120ea0e8}{initialize\+\_\+\+Photoresistor}} (int pin)
+\begin{DoxyCompactList}\small\item\em function to initialize the photoresistor \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{light_sensor_8cpp_aff4040dfad5d9fc27283fbd44129cec5}{calibrate\+\_\+\+Photoresistor}} (int pin)
+\begin{DoxyCompactList}\small\item\em function to calibrate the photoresistor \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{light_sensor_8cpp_af3cd3da50dbdf435c0a3e4ae4f569a16}{check\+\_\+for\+\_\+change\+\_\+\+Photoresistor}} (int Photoresistor\+\_\+value, int calibration, int threeshold)
+\begin{DoxyCompactList}\small\item\em check if the photoresistor value has changed significantly \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+file for the light sensor 
+
+\begin{DoxyAuthor}{Author}
+Hákon Hlynsson (\href{mailto:s225765@dtu.dk}{\texttt{ s225765@dtu.\+dk}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/17
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+open source 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{light_sensor_8cpp_aff4040dfad5d9fc27283fbd44129cec5}\index{lightSensor.cpp@{lightSensor.cpp}!calibrate\_Photoresistor@{calibrate\_Photoresistor}}
+\index{calibrate\_Photoresistor@{calibrate\_Photoresistor}!lightSensor.cpp@{lightSensor.cpp}}
+\doxysubsubsection{\texorpdfstring{calibrate\_Photoresistor()}{calibrate\_Photoresistor()}}
+{\footnotesize\ttfamily \label{light_sensor_8cpp_aff4040dfad5d9fc27283fbd44129cec5} 
+int calibrate\+\_\+\+Photoresistor (\begin{DoxyParamCaption}\item[{int}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+function to calibrate the photoresistor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & the pin to which the photoresistor is connected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int returns the calibration value 
+\end{DoxyReturn}
+\Hypertarget{light_sensor_8cpp_af3cd3da50dbdf435c0a3e4ae4f569a16}\index{lightSensor.cpp@{lightSensor.cpp}!check\_for\_change\_Photoresistor@{check\_for\_change\_Photoresistor}}
+\index{check\_for\_change\_Photoresistor@{check\_for\_change\_Photoresistor}!lightSensor.cpp@{lightSensor.cpp}}
+\doxysubsubsection{\texorpdfstring{check\_for\_change\_Photoresistor()}{check\_for\_change\_Photoresistor()}}
+{\footnotesize\ttfamily \label{light_sensor_8cpp_af3cd3da50dbdf435c0a3e4ae4f569a16} 
+int check\+\_\+for\+\_\+change\+\_\+\+Photoresistor (\begin{DoxyParamCaption}\item[{int}]{Photoresistor\+\_\+value}{, }\item[{int}]{calibration}{, }\item[{int}]{threeshold}{}\end{DoxyParamCaption})}
+
+
+
+check if the photoresistor value has changed significantly 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Photoresistor\+\_\+value} & the current value of the photoresistor \\
+\hline
+{\em calibration} & the calibration value for the photoresistor \\
+\hline
+{\em threeshold} & the threshold for detecting significant light changes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int true or false depending on if the light level change exceeds the threshold 
+\end{DoxyReturn}
+\Hypertarget{light_sensor_8cpp_a37837eb2ebe796099fe55e03120ea0e8}\index{lightSensor.cpp@{lightSensor.cpp}!initialize\_Photoresistor@{initialize\_Photoresistor}}
+\index{initialize\_Photoresistor@{initialize\_Photoresistor}!lightSensor.cpp@{lightSensor.cpp}}
+\doxysubsubsection{\texorpdfstring{initialize\_Photoresistor()}{initialize\_Photoresistor()}}
+{\footnotesize\ttfamily \label{light_sensor_8cpp_a37837eb2ebe796099fe55e03120ea0e8} 
+int initialize\+\_\+\+Photoresistor (\begin{DoxyParamCaption}\item[{int}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+function to initialize the photoresistor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & the pin to which the photoresistor is connected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int the calibration value 
+\end{DoxyReturn}
+\Hypertarget{light_sensor_8cpp_a4341d41214716956b2f5626f0c326593}\index{lightSensor.cpp@{lightSensor.cpp}!read\_Photoresistor@{read\_Photoresistor}}
+\index{read\_Photoresistor@{read\_Photoresistor}!lightSensor.cpp@{lightSensor.cpp}}
+\doxysubsubsection{\texorpdfstring{read\_Photoresistor()}{read\_Photoresistor()}}
+{\footnotesize\ttfamily \label{light_sensor_8cpp_a4341d41214716956b2f5626f0c326593} 
+int read\+\_\+\+Photoresistor (\begin{DoxyParamCaption}\item[{int}]{pin}{}\end{DoxyParamCaption})}
+
+
+
+function to read the value of the photoresistor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & the pin to which the photoresistor is connected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int the value of the photoresistor 
+\end{DoxyReturn}

@@ -1,3 +1,13 @@
+/**
+ * @file soundSensor.c
+ * @author Hákon Hlynsson  (s225765@dtu.dk)
+ * @brief source file for the sound sensor
+ * @version 1.0
+ * @date 2025-01-16
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #include "soundSensor.h"
 #include <Arduino.h>
 

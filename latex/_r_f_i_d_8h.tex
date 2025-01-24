@@ -1,0 +1,66 @@
+\doxysection{RFID.\+h File Reference}
+\hypertarget{_r_f_i_d_8h}{}\label{_r_f_i_d_8h}\index{RFID.h@{RFID.h}}
+
+
+This program stores a number of electronic keys UIDs.  
+
+
+{\ttfamily \#include $<$SPI.\+h$>$}\newline
+{\ttfamily \#include $<$MFRC522.\+h$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_r_f_i_d_result}{RFIDResult}}
+\begin{DoxyCompactList}\small\item\em struct to hold the RFID results \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_r_f_i_d_8h_a1bbfef929a4959f12420b0fe38cdd62e}\label{_r_f_i_d_8h_a1bbfef929a4959f12420b0fe38cdd62e} 
+void {\bfseries RFIDsetup} ()
+\begin{DoxyCompactList}\small\item\em function to setup the RFID module and serial communication \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_r_f_i_d_result}{RFIDResult}} \mbox{\hyperlink{_r_f_i_d_8h_a4bb49bb61c1fc360299eeb637a5e49c3}{read\+UID}} ()
+\begin{DoxyCompactList}\small\item\em function to read the UID of a card and check if it is approved \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_r_f_i_d_8h_a014c890c0a8d0abba265e605ec431b6e}\label{_r_f_i_d_8h_a014c890c0a8d0abba265e605ec431b6e} 
+String {\bfseries known\+UIDs} \mbox{[}$\,$\mbox{]}
+\item 
+\Hypertarget{_r_f_i_d_8h_ad7f6b296a0e2275847fa0159ace77098}\label{_r_f_i_d_8h_ad7f6b296a0e2275847fa0159ace77098} 
+MFRC522 {\bfseries mfrc522}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This program stores a number of electronic keys UIDs. 
+
+\begin{DoxyAuthor}{Author}
+Lauge Brandt (\href{mailto:s221215@dtu.dk}{\texttt{ s221215@dtu.\+dk}})
+\end{DoxyAuthor}
+Using the RFID-\/\+RC522 module to read cards and keys.
+
+Check if the card or keys UID has access or should be denied. \begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/24
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+open source 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_r_f_i_d_8h_a4bb49bb61c1fc360299eeb637a5e49c3}\index{RFID.h@{RFID.h}!readUID@{readUID}}
+\index{readUID@{readUID}!RFID.h@{RFID.h}}
+\doxysubsubsection{\texorpdfstring{readUID()}{readUID()}}
+{\footnotesize\ttfamily \label{_r_f_i_d_8h_a4bb49bb61c1fc360299eeb637a5e49c3} 
+\mbox{\hyperlink{struct_r_f_i_d_result}{RFIDResult}} read\+UID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+function to read the UID of a card and check if it is approved 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_r_f_i_d_result}{RFIDResult} the result of the RFID reading 
+\end{DoxyReturn}

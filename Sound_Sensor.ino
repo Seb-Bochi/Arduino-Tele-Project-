@@ -1,10 +1,17 @@
 /**
  * @file Sound_Sensor.ino
+ * @author Hákon Hlynsson  (s225765@dtu.dk)
  * @brief Code for monitoring sound levels using a KY-037 sound sensor and triggering an alarm if sound levels deviate significantly.
- *
+ * @version 1.0
+ * @date 2025-01-16
+ * 
+ * @copyright Copyright (c) 2025
+ * 
  * This code initializes the KY-037 sound sensor, calibrates it to determine a baseline value, and checks for changes in sound levels.
  * If the sound level deviates from the baseline by a specified threshold, an alarm signal is triggered.
  */
+
+
 
 int SensorPin = A0;            //< Analog pin to which the KY-037 sensor is connected
 int Calibration_Value = 0;     //< Baseline calibration value for sound sensor

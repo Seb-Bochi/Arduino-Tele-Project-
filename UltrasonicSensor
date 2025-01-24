@@ -1,9 +1,26 @@
+/**
+ * @file UltrasonicSensor
+ * @author Sebastian Bochineck (s224014@dtu.dk)
+ * @brief source file for the ultrasonic sensor
+ * @version 1.0
+ * @date 2025-01-17
+ * 
+ * @copyright open source
+ * 
+ */
+
 #include "ultrasonicSensor.h"
 #include <Arduino.h>
 
 
 float duration, distance;
 
+/**
+ * @brief initialize the ultrasonic sensor with the trigPin and echoPin
+ * 
+ * @param trigPin the pin the trig is connected to
+ * @param echoPin the pin the echo is connected to
+ */
 void initUltrasonicSensor(int trigPin, int echoPin) {
 trigPin;
  echoPin;
@@ -12,6 +29,13 @@ trigPin;
   pinMode(echoPin, INPUT);
 }
 
+/**
+ * @brief function to check if an object is within 20 cm of the sensor
+ * 
+ * @param trigPin the pin the trig is connected to
+ * @param echoPin the pin the echo is connected to
+ * @return int the function returns 1 if an object is within 20 cm and 0 if not
+ */
 int ultrasonicSensor(int trigPin, int echoPin) {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);

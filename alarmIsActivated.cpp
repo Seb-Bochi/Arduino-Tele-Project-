@@ -1,9 +1,26 @@
+/**
+ * @file alarmIsActivated.cpp
+ * @author your name (you@domain.com)
+ * @brief file for activating the alarm
+ * @version 1.0
+ * @date 2025-01-24
+ * 
+ * @copyright open source
+ * 
+ */
+
 #include "alarmIsActivated.h"
 #include <Arduino.h>
 
 
 // variable for reading the pushbutton status
-
+/**
+ * @brief function to initialize the alarm system
+ * 
+ * @param buttonPin the pin for the button
+ * @param ledPin the pin for the led
+ * @param buzzerPin the pin for the buzzer
+ */
 void initAlarmIsActivated(int buttonPin, int ledPin, int buzzerPin) {
 
 
@@ -14,7 +31,14 @@ void initAlarmIsActivated(int buttonPin, int ledPin, int buzzerPin) {
 
   pinMode(buzzerPin, OUTPUT);  
 }
-
+/**
+ * @brief function to handle the alarm system
+ * 
+ * @param buttonPin the pin for the button
+ * @param ledPin the pin for the led
+ * @param buzzerPin the pin for the buzzer
+ * @return int the state of the led
+ */
 int alarmIsActivated(int buttonPin, int ledPin, int buzzerPin) { 
   // read the state of the pushbutton value:
   // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
@@ -28,7 +52,14 @@ int alarmIsActivated(int buttonPin, int ledPin, int buzzerPin) {
 
       return 1;
 }
-
+/**
+ * @brief function to turn off the alarm
+ * 
+ * @param buttonPin  the pin for the button
+ * @param ledPin the pin for the led
+ * @param buzzerPin the pin for the buzzer
+ * @return int the state of the alarm
+ */
 int alarmIsNOTActivated(int buttonPin, int ledPin, int buzzerPin) { 
   // read the state of the pushbutton value:
   // check if the pushbutton is pressed. If it is, the buttonState is HIGH:

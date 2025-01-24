@@ -1,0 +1,101 @@
+\doxysection{alarm\+Is\+Activated.\+cpp File Reference}
+\hypertarget{alarm_is_activated_8cpp}{}\label{alarm_is_activated_8cpp}\index{alarmIsActivated.cpp@{alarmIsActivated.cpp}}
+
+
+file for activating the alarm  
+
+
+{\ttfamily \#include "{}alarm\+Is\+Activated.\+h"{}}\newline
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{alarm_is_activated_8cpp_ade76f6dc1bcccd4b445fc9401eb9cf30}{init\+Alarm\+Is\+Activated}} (int button\+Pin, int led\+Pin, int buzzer\+Pin)
+\begin{DoxyCompactList}\small\item\em function to initialize the alarm system \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{alarm_is_activated_8cpp_a5d4703f1fd32399861a3e5a41a82d7e3}{alarm\+Is\+Activated}} (int button\+Pin, int led\+Pin, int buzzer\+Pin)
+\begin{DoxyCompactList}\small\item\em function to handle the alarm system \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{alarm_is_activated_8cpp_ab58c539e37307c4ee086ac3ff65d0fce}{alarm\+Is\+NOTActivated}} (int button\+Pin, int led\+Pin, int buzzer\+Pin)
+\begin{DoxyCompactList}\small\item\em function to turn off the alarm \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+file for activating the alarm 
+
+\begin{DoxyAuthor}{Author}
+your name (\href{mailto:you@domain.com}{\texttt{ you@domain.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2025-\/01-\/24
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+open source 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{alarm_is_activated_8cpp_a5d4703f1fd32399861a3e5a41a82d7e3}\index{alarmIsActivated.cpp@{alarmIsActivated.cpp}!alarmIsActivated@{alarmIsActivated}}
+\index{alarmIsActivated@{alarmIsActivated}!alarmIsActivated.cpp@{alarmIsActivated.cpp}}
+\doxysubsubsection{\texorpdfstring{alarmIsActivated()}{alarmIsActivated()}}
+{\footnotesize\ttfamily \label{alarm_is_activated_8cpp_a5d4703f1fd32399861a3e5a41a82d7e3} 
+int alarm\+Is\+Activated (\begin{DoxyParamCaption}\item[{int}]{button\+Pin}{, }\item[{int}]{led\+Pin}{, }\item[{int}]{buzzer\+Pin}{}\end{DoxyParamCaption})}
+
+
+
+function to handle the alarm system 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button\+Pin} & the pin for the button \\
+\hline
+{\em led\+Pin} & the pin for the led \\
+\hline
+{\em buzzer\+Pin} & the pin for the buzzer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int the state of the led 
+\end{DoxyReturn}
+\Hypertarget{alarm_is_activated_8cpp_ab58c539e37307c4ee086ac3ff65d0fce}\index{alarmIsActivated.cpp@{alarmIsActivated.cpp}!alarmIsNOTActivated@{alarmIsNOTActivated}}
+\index{alarmIsNOTActivated@{alarmIsNOTActivated}!alarmIsActivated.cpp@{alarmIsActivated.cpp}}
+\doxysubsubsection{\texorpdfstring{alarmIsNOTActivated()}{alarmIsNOTActivated()}}
+{\footnotesize\ttfamily \label{alarm_is_activated_8cpp_ab58c539e37307c4ee086ac3ff65d0fce} 
+int alarm\+Is\+NOTActivated (\begin{DoxyParamCaption}\item[{int}]{button\+Pin}{, }\item[{int}]{led\+Pin}{, }\item[{int}]{buzzer\+Pin}{}\end{DoxyParamCaption})}
+
+
+
+function to turn off the alarm 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button\+Pin} & the pin for the button \\
+\hline
+{\em led\+Pin} & the pin for the led \\
+\hline
+{\em buzzer\+Pin} & the pin for the buzzer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int the state of the alarm 
+\end{DoxyReturn}
+\Hypertarget{alarm_is_activated_8cpp_ade76f6dc1bcccd4b445fc9401eb9cf30}\index{alarmIsActivated.cpp@{alarmIsActivated.cpp}!initAlarmIsActivated@{initAlarmIsActivated}}
+\index{initAlarmIsActivated@{initAlarmIsActivated}!alarmIsActivated.cpp@{alarmIsActivated.cpp}}
+\doxysubsubsection{\texorpdfstring{initAlarmIsActivated()}{initAlarmIsActivated()}}
+{\footnotesize\ttfamily \label{alarm_is_activated_8cpp_ade76f6dc1bcccd4b445fc9401eb9cf30} 
+void init\+Alarm\+Is\+Activated (\begin{DoxyParamCaption}\item[{int}]{button\+Pin}{, }\item[{int}]{led\+Pin}{, }\item[{int}]{buzzer\+Pin}{}\end{DoxyParamCaption})}
+
+
+
+function to initialize the alarm system 
+
+
+\begin{DoxyParams}{Parameters}
+{\em button\+Pin} & the pin for the button \\
+\hline
+{\em led\+Pin} & the pin for the led \\
+\hline
+{\em buzzer\+Pin} & the pin for the buzzer \\
+\hline
+\end{DoxyParams}
